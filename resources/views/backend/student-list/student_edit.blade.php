@@ -18,22 +18,21 @@
                     <label for="name">Student Name</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $student->name) }}" placeholder="Enter student name">
 
-                    <label for="age">Student Age</label>
+                    <label for="age" class="form-label mt-3">Student Age</label>
                     <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" value="{{ old('age', $student->age) }}" placeholder="Enter student age">
 
-                    <label for="gender">Student Gender</label>
+                    <label for="gender" class="form-label mt-3">Student Gender</label>
                     <select class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
                         <option value="">Select Gender</option>
                         <option value="male" {{ old('gender', $student->gender) == 'male' ? 'selected' : '' }}>Male</option>
                         <option value="female" {{ old('gender', $student->gender) == 'female' ? 'selected' : '' }}>Female</option>
                     </select>
 
-                    <label for="birthday">Student Birthday</label>
+                    <label for="birthday" class="form-label mt-3">Student Birthday</label>
                     <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday" name="birthday" value="{{ old('birthday', $student->birthday) }}">
 
-                    <label for="address">Student Address</label>
-                    <input type="textarea" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $student->address) }}" placeholder="Enter student address"></input>
-
+                    <label for="address" class="form-label mt-3">Student Address</label>
+                    <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter student address">{{ old('address', $student->address) }}</textarea>
                     <br>
                     @error('name,age,gender,birthday,address')
                     <div class="invalid-feedback">{{ $message }}</div>

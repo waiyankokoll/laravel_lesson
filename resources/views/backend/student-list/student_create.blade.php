@@ -14,28 +14,32 @@
             <form action="{{ route('students.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Student Name</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter student name">
+                    <label for="name" class="form-label">Student Name</label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                        placeholder="Enter student name">
 
-                    <label for="age">Student Age</label>
-                    <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age" placeholder="Enter student age">
-                    
-                    <label for="gender">Student Gender</label>
+                    <label for="age" class="form-label mt-3">Student Age</label>
+                    <input type="number" class="form-control @error('age') is-invalid @enderror" id="age" name="age"
+                        placeholder="Enter student age">
+
+                    <label for="gender" class="form-label mt-3">Student Gender</label>
                     <select class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender">
                         <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
 
-                    <label for="birthday">Student Birthday</label>
-                    <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday" name="birthday">
+                    <label for="birthday" class="form-label mt-3">Student Birthday</label>
+                    <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday"
+                        name="birthday">
 
-                    <label for="address">Student Address</label>
-                    <input type="textarea" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter student address"></input>
+                    <label for="address" class="form-label mt-3">Student Address</label>
+                    <textarea class="form-control @error('address') is-invalid @enderror" id="address"
+                        name="address" placeholder="Enter student address"></textarea>
 
                     <br>
                     @error('name,age,gender,birthday,address')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Create Student</button>

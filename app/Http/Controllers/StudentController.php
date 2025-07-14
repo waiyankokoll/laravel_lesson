@@ -12,7 +12,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::orderBy('id', 'desc')->get();
         return view("backend.student-list.student_list", compact("students"));
     }
 

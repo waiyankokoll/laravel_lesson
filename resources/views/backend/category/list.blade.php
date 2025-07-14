@@ -27,7 +27,7 @@
                         <tbody>
                             @foreach ($categories as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>
                                     <a href="{{ route('categories.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>

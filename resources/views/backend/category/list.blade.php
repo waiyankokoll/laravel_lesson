@@ -21,6 +21,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
+                                <th>Books Count</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
+                                <td>{{ $item->books->count() }}</td>
                                 <td>
                                     <a href="{{ route('categories.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <form action="{{ route('categories.destroy', $item->id) }}" method="POST" style="display:inline;">

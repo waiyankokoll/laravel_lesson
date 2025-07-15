@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,4 @@ Route::get('/post', [App\Http\Controllers\TemplateController::class, 'post'])->n
 Route::get('/contact', [App\Http\Controllers\TemplateController::class, 'contact'])->name('contact');
 Route::resource('categories', CategoryController::class);
 Route::resource('students', App\Http\Controllers\StudentController::class);
+Route::resource('books', BookController::class);

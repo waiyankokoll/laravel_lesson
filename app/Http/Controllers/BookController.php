@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
+
+use function Laravel\Prompts\alert;
 
 class BookController extends Controller
 {
@@ -12,7 +15,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+        return view("backend.Book.list", compact("books"));
     }
 
     /**
@@ -20,7 +24,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view("backend.Book.create",compact("categories"));
     }
 
     /**
@@ -28,15 +33,42 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+
+        $request->validate([
+            'bookName' => 'required|string|min:3|max:255',
+            'bookAuthor' => 'required|string|min:3|max:255',
+            'bookPrice' => 'required|numeric',
+            'bookCategory' => 'required|numeric|exists:categories,id',
+            'bookImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bookDescription' => 'required|string|min:10|max:1000',
+            
+        ]);
+
+        $book = new Book();
+            $book->name = $request->bookName;
+            $book->author = $request->bookAuthor;
+            $book->price = $request->bookPrice;
+            $book->category_id = $request->bookCategory;
+            $book->description = $request->bookDescription;
+
+            if ($request->hasFile('bookImage')) {
+                $image = $request->file('bookImage');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $uploadPath = public_path('images/books');
+                $image->move($uploadPath, $imageName);
+                $book->image ='images/books/'. $imageName;
+            }
+
+            $book->save();
+        return redirect()->route('books.index')->with('success', 'Book created successfully.');
+        }
 
     /**
      * Display the specified resource.
      */
     public function show(Book $book)
     {
-        //
+        return view("backend.Book.deail", compact("book"));
     }
 
     /**
@@ -44,7 +76,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $categories = Category::all();
+        return view("backend.Book.edit", compact("book", "categories"));
     }
 
     /**
@@ -52,7 +85,8 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        
+        
     }
 
     /**
@@ -60,6 +94,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route("books.index")->with("success","Book deleted successfully.");
     }
 }
